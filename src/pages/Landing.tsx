@@ -39,23 +39,6 @@ const Landing = () => {
                   Learn More
                 </Button>
               </div>
-
-              <div className="flex items-center gap-6 pt-4">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">50k+</div>
-                  <div className="text-sm text-muted-foreground">Active Users</div>
-                </div>
-                <div className="w-px h-12 bg-border" />
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">4.9★</div>
-                  <div className="text-sm text-muted-foreground">User Rating</div>
-                </div>
-                <div className="w-px h-12 bg-border" />
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">92%</div>
-                  <div className="text-sm text-muted-foreground">Success Rate</div>
-                </div>
-              </div>
             </div>
             
             <div className="relative">
