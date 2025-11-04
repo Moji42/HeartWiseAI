@@ -4,8 +4,15 @@ import Navbar from "@/components/Navbar";
 import { Heart, Brain, TrendingUp, Shield, MessageCircle, BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-image.jpg";
+import { useRef } from "react";
 
 const Landing = () => {
+  const featuresRef = useRef<HTMLDivElement>(null);
+
+  const scrollToFeatures = () => {
+    featuresRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -30,12 +37,12 @@ const Landing = () => {
               </p>
               
               <div className="flex flex-wrap gap-4">
-                <Link to="/dashboard">
+                <Link to="/signup">
                   <Button variant="hero" size="xl">
-                    Start Your Journey
+                    Get Started
                   </Button>
                 </Link>
-                <Button variant="outline" size="xl">
+                <Button variant="outline" size="xl" onClick={scrollToFeatures}>
                   Learn More
                 </Button>
               </div>
@@ -54,7 +61,7 @@ const Landing = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 px-4 bg-muted/30">
+      <section className="py-20 px-4 bg-muted/30" ref={featuresRef}>
         <div className="container mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4">
