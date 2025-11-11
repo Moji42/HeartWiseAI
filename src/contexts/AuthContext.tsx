@@ -11,6 +11,7 @@ interface AuthContextType {
   logout: () => Promise<void>;
 }
 
+//authentication stuff
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
