@@ -3,7 +3,8 @@ import { Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 
-const Navbar = () => {
+//navbar 
+const Navbar = () => { 
   const { user, logout } = useAuth();
 
   return (
