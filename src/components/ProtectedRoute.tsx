@@ -9,7 +9,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { user, loading } = useAuth();
 
   if (loading) {
-    return <div>Loading...</div>; // You might want to replace this with a proper loading component
+    return <div>Loading...</div>; // replace later
   }
 
   if (!user) {
