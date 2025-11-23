@@ -1,0 +1,176 @@
+/* src/App.css */
+
+/* Base layout & fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+:root {
+  --bg-start: #ff6a6a;
+  --bg-end: #ff3b5c;
+  --accent: #ff416c;
+  --muted-text: rgba(0,0,0,0.55);
+}
+
+/* Body + Ionic content base */
+html, body, #root, ion-app, ion-content, .App {
+  height: 100%;
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ion-content {
+  --background: linear-gradient(180deg, var(--bg-start), var(--bg-end));
+  padding: 0;
+}
+
+/* Landing page */
+.landing {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color: white;
+  padding: 24px;
+}
+
+.landing-inner {
+  max-width: 560px;
+  margin: 16px;
+}
+
+.landing h1 {
+  font-size: 2.2rem;
+  margin: 0 0 8px 0;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.landing p {
+  margin: 0 0 20px;
+  font-size: 1rem;
+  opacity: 0.95;
+  line-height: 1.4;
+}
+
+/* Chat outer container (scroller) */
+.chat-outer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-top: 8px;
+  padding-bottom: 90px; /* leave room for input */
+  box-sizing: border-box;
+}
+
+/* Chat messages container */
+.chat-container {
+  display:flex;
+  flex-direction:column;
+  gap: 12px;
+  padding: 18px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+/* Message bubble base */
+.msg {
+  max-width: 82%;
+  padding: 12px 16px;
+  border-radius: 18px;
+  font-size: 15px;
+  line-height: 1.4;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  animation: fadeIn 180ms ease;
+  word-break: break-word;
+}
+
+/* AI bubble (left) */
+.msg.ai {
+  align-self:flex-start;
+  background: rgba(255,255,255,0.96);
+  color: #222;
+  border-top-left-radius: 6px;
+}
+
+/* user bubble (right) */
+.msg.user {
+  align-self:flex-end;
+  background: rgba(255,225,230,0.98);
+  color: #3b0a10;
+  border-top-right-radius: 6px;
+}
+
+/* system / small notice */
+.msg.system {
+  align-self:center;
+  background: rgba(255,255,255,0.85);
+  color: #444;
+  font-style: italic;
+  border-radius: 12px;
+}
+
+/* Message content and time */
+.msg-content { margin-bottom: 6px; }
+.msg-time {
+  display:block;
+  font-size: 11px;
+  color: var(--muted-text);
+  opacity: 0.9;
+}
+
+/* Input wrapper anchored at bottom */
+.chat-input-wrapper {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: 14px;
+  z-index: 50;
+  display:flex;
+  justify-content:center;
+}
+
+/* Input pill */
+.chat-input {
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  width: calc(100% - 24px);
+  max-width: 980px;
+  padding: 10px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.96);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.16);
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* textarea look */
+.chat-textarea {
+  --padding-start: 10px;
+  --padding-end: 10px;
+  --placeholder-color: #666;
+  flex:1;
+  min-height: 40px;
+  max-height: 120px;
+  border-radius: 999px;
+}
+
+/* send button round */
+.send-btn {
+  --background: linear-gradient(135deg, #ff416c, #ff6a6a);
+  --box-shadow: none;
+  color: white;
+  border-radius: 999px;
+  padding: 8px 16px;
+  min-width: 72px;
+}
+
+/* small screen tweaks */
+@media (max-width: 480px) {
+  .chat-container { padding: 12px; gap: 10px; }
+  .landing h1 { font-size: 1.6rem; }
+}
+
+/* animations */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0);} }
