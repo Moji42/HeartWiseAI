@@ -18,6 +18,7 @@ const AICoach = () => {
     if (!input.trim()) return;
 
     // Add user message
+    // message from chatbot
     setMessages([...messages, { role: "user", content: input }]);
 
     // mock chat response
