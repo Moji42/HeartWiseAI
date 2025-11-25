@@ -32,7 +32,7 @@ const Landing = () => {
               </h1>
               
               <p className="text-lg text-muted-foreground">
-                HeartWise AI combines cutting-edge artificial intelligence with proven psychological principles 
+                HeartWise AI combines cutting-edge AI with proven psychological principles 
                 to help you build healthier, more fulfilling relationships.
               </p>
               
