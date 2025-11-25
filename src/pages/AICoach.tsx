@@ -19,9 +19,11 @@ const AICoach = () => {
 
     // Add user message
     // message from chatbot
+    // swap with mobile chatbot integration
     setMessages([...messages, { role: "user", content: input }]);
 
     // mock chat response
+    
     
     setTimeout(() => {
       setMessages(prev => [
@@ -36,6 +38,7 @@ const AICoach = () => {
     setInput("");
   };
 
+  //list possible prompts
   const quickPrompts = [
     "How can I communicate better?",
     "I'm feeling overwhelmed",
@@ -112,7 +115,6 @@ const AICoach = () => {
 
             {/* Sidebar */}
             <div className="space-y-6">
-              {/* Quick Prompts */}
               <Card>
                 <CardHeader>
                   <CardTitle className="text-base flex items-center gap-2">
