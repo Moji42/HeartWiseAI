@@ -20,7 +20,8 @@ const AICoach = () => {
     // Add user message
     setMessages([...messages, { role: "user", content: input }]);
 
-    // Simulate AI response (In production, this would call Lovable AI)
+    // mock chat response
+    
     setTimeout(() => {
       setMessages(prev => [
         ...prev,
