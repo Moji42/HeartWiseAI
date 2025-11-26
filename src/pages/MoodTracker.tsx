@@ -48,7 +48,7 @@ const MoodTracker = () => {
             <h1 className="text-4xl font-bold mb-2">
               How are you <span className="bg-gradient-to-r from-[hsl(0,85%,60%)] to-[hsl(30,95%,60%)] bg-clip-text text-transparent">feeling</span> today?
             </h1>
-            <p className="text-muted-foreground">Track your Emotional State and Identify Patterns over Time</p>
+            <p className="text-muted-foreground">Track your emotional state and identify patterns over time</p>
           </div>
 
           <div className="grid gap-6">

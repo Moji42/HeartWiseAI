@@ -1,0 +1,17 @@
+{
+  "extends": "@react-native/typescript-config",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "jsx": "react-native"
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "index.js", "App.tsx"],
+  "exclude": ["node_modules", "**/node_modules", "ios", "android"]
+}

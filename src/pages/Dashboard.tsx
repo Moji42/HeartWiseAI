@@ -140,7 +140,7 @@ const Dashboard = () => {
                   <MessageCircle className="w-4 h-4 text-primary" />
                 </div>
                 <div className="flex-1">
-                  <p className="text-sm font-medium">AI Coaching Session</p>
+                  <p className="text-sm font-medium">AI coaching session</p>
                   <p className="text-xs text-muted-foreground">2 days ago</p>
                 </div>
               </div>

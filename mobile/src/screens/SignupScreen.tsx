@@ -1,0 +1,243 @@
+import React, { useState } from 'react';
+import {
+  View,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import LinearGradient from 'react-native-linear-gradient';
+import { ArrowLeft, Heart, User, Mail, Lock } from 'lucide-react-native';
+import { AuthStackParamList } from '@/navigation/types';
+import { useTheme } from '@/contexts/ThemeContext';
+import { useAuth } from '@/contexts/AuthContext';
+import { Text, Button, Card, Input } from '@/components/ui';
+
+type NavigationProp = NativeStackNavigationProp<AuthStackParamList, 'Signup'>;
+
+export default function SignupScreen() {
+  const navigation = useNavigation<NavigationProp>();
+  const { theme } = useTheme();
+  const { signup } = useAuth();
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState<{ name?: string; email?: string; password?: string }>({});
+
+  const validate = () => {
+    const newErrors: { name?: string; email?: string; password?: string } = {};
+
+    if (!name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+
+    if (!email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      newErrors.email = 'Please enter a valid email';
+    }
+
+    if (!password) {
+      newErrors.password = 'Password is required';
+    } else if (password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSignup = async () => {
+    if (!validate()) return;
+
+    try {
+      setLoading(true);
+      await signup(email, password, name);
+      // Navigation will happen automatically via RootNavigator
+    } catch (error) {
+      Alert.alert('Error', 'Failed to create account. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.keyboardView}
+      >
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.scrollContent}
+          keyboardShouldPersistTaps="handled"
+        >
+          {/* Header */}
+          <View style={styles.header}>
+            <TouchableOpacity
+              onPress={() => navigation.goBack()}
+              style={[styles.backButton, { backgroundColor: theme.colors.muted }]}
+            >
+              <ArrowLeft size={20} color={theme.colors.foreground} />
+            </TouchableOpacity>
+          </View>
+
+          {/* Logo */}
+          <View style={styles.logoContainer}>
+            <LinearGradient
+              colors={theme.colors.gradients.primary}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+              style={styles.logoGradient}
+            >
+              <Heart size={32} color={theme.colors.white} />
+            </LinearGradient>
+          </View>
+
+          {/* Form Card */}
+          <Card style={styles.formCard}>
+            <View style={styles.formHeader}>
+              <Text variant="h2" center>Create an Account</Text>
+              <Text variant="body" muted center style={styles.formSubtitle}>
+                Start your emotional wellness journey
+              </Text>
+            </View>
+
+            <View style={styles.form}>
+              <Input
+                label="Name"
+                placeholder="Enter your name"
+                value={name}
+                onChangeText={setName}
+                autoCapitalize="words"
+                autoComplete="name"
+                error={errors.name}
+                leftIcon={<User size={20} color={theme.colors.mutedForeground} />}
+              />
+
+              <Input
+                label="Email"
+                placeholder="Enter your email"
+                value={email}
+                onChangeText={setEmail}
+                keyboardType="email-address"
+                autoCapitalize="none"
+                autoComplete="email"
+                error={errors.email}
+                leftIcon={<Mail size={20} color={theme.colors.mutedForeground} />}
+              />
+
+              <Input
+                label="Password"
+                placeholder="Create a password"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry
+                autoComplete="password-new"
+                error={errors.password}
+                leftIcon={<Lock size={20} color={theme.colors.mutedForeground} />}
+              />
+
+              <Button
+                variant="gradient"
+                size="lg"
+                onPress={handleSignup}
+                loading={loading}
+                style={styles.submitButton}
+              >
+                Sign Up
+              </Button>
+            </View>
+          </Card>
+
+          {/* Footer */}
+          <View style={styles.footer}>
+            <Text variant="body" muted>
+              Already have an account?{' '}
+            </Text>
+            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+              <Text variant="body" color={theme.colors.primary.main}>
+                Log In
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* Terms */}
+          <Text variant="caption" muted center style={styles.terms}>
+            By signing up, you agree to our Terms of Service and Privacy Policy
+          </Text>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  keyboardView: {
+    flex: 1,
+  },
+  scrollContent: {
+    flexGrow: 1,
+    paddingHorizontal: 20,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingTop: 8,
+    marginBottom: 20,
+  },
+  backButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  logoContainer: {
+    alignItems: 'center',
+    marginBottom: 32,
+  },
+  logoGradient: {
+    width: 72,
+    height: 72,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  formCard: {
+    padding: 24,
+  },
+  formHeader: {
+    marginBottom: 24,
+  },
+  formSubtitle: {
+    marginTop: 8,
+  },
+  form: {
+    gap: 20,
+  },
+  submitButton: {
+    marginTop: 8,
+  },
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 24,
+  },
+  terms: {
+    marginTop: 16,
+    marginBottom: 32,
+    paddingHorizontal: 20,
+  },
+});
+
