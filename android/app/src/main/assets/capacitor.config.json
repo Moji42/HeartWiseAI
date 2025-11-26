@@ -1,0 +1,5 @@
+{
+	"appId": "com.example.myhybridapp",
+	"appName": "my-hybrid-app",
+	"webDir": "build"
+}
